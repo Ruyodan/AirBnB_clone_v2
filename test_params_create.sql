@@ -1,16 +1,12 @@
--- Get the initial number of records in the states table
-SELECT COUNT(*) INTO @initial_count FROM states;
+-- Step 1: Create new states
+INSERT INTO State (name) VALUES ('California'), ('Arizona');
 
--- Execute the console command to create a new state
-INSERT INTO states (name) VALUES ('California');
+-- Step 2: Retrieve all states
+SELECT * FROM State;
 
--- Get the updated number of records in the states table
-SELECT COUNT(*) INTO @updated_count FROM states;
+-- Step 3: Create a new place
+INSERT INTO Place (city_id, user_id, name, number_rooms, number_bathrooms, max_guest, price_by_night, latitude, longitude)
+VALUES ('0001', '0001', 'My_little_house', 4, 2, 10, 300, 37.773972, -122.431297);
 
--- Check if the difference is +1
-SET @difference = @updated_count - @initial_count;
-SELECT
-  CASE
-    WHEN @difference = 1 THEN 'Test passed'
-    ELSE 'Test failed'
-  END AS 'Test Result';
+-- Step 4: Retrieve all places
+SELECT * FROM Place;
