@@ -1,5 +1,4 @@
 #!/usr/bin/python3
-
 """
 Define class DatabaseStorage
 
@@ -15,6 +14,7 @@ from sqlalchemy.orm import sessionmaker, scoped_session
 import models
 from models.base_model import Base
 
+
 class DBStorage:
     """
     Create SQLalchemy database
@@ -23,6 +23,7 @@ class DBStorage:
         __engine (sqlalchemy.Engine): The working SQLAlchemy engine.
         __session (sqlalchemy.Session): The working SQLAlchemy session.
     """
+
     __engine = None
     __session = None
 
@@ -42,10 +43,10 @@ class DBStorage:
         host = getenv("HBNB_MYSQL_HOST")
         db = getenv("HBNB_MYSQL_DB")
         envv = getenv("HBNB_ENV", "none")
-
-        self.__engine = create_engine('mysql+mysqldb://{}:{}@{}/{}'.format(
-            user, pwd, host, db), pool_pre_ping=True)
-
+        self.__engine = create_engine(
+            'mysql+mysqldb://{}:{}@{}/{}'.format(user, pwd, host, db),
+            pool_pre_ping=True
+        )
         if envv == 'test':
             Base.metadata.drop_all(self.__engine)
 
@@ -62,7 +63,6 @@ class DBStorage:
                 <class name>.<obj id> = obj.
         """
         db_dict = {}
-
         if cls is not None:
             objs = self.__session.query(cls).all()
             for obj in objs:
@@ -74,9 +74,8 @@ class DBStorage:
                     objs = self.__session.query(v).all()
                     if len(objs) > 0:
                         for obj in objs:
-                            key = "{}.{}".format(obj.__class__.__name__, obj.id)
+                            key = "{}.{}".format(obj.__class__.__name__ obj.id)
                             db_dict[key] = obj
-
         return db_dict
 
     def new(self, obj):

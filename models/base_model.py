@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+
 """
 Defines the BaseModel class.
 
@@ -7,17 +8,17 @@ project. It defines the common attributes and methods that all other classes
 should inherit.
 
 Attributes:
-    id (sqlalchemy.Column): The unique identifier for the object.
-    created_at (sqlalchemy.Column): The datetime at which the object was created.
-    updated_at (sqlalchemy.Column): The datetime at which the object was last updated.
+id (sqlalchemy.Column): The unique identifier for the object.
+created_at (sqlalchemy.Column): The datetime at which the object was created.
+updated_at (sqlalchemy.Column): Datetime at which the object was last updated.
 
 Methods:
-    __init__(self, *args, **kwargs): Initializes a new instance of the class.
-    __str__(self): Returns a string representation of the object.
-    __repr__(self): Returns a string representation of the object.
-    save(self): Updates the updated_at attribute with the current datetime.
-    to_dict(self): Returns a dictionary representation of the object.
-    delete(self): Deletes the object from the storage.
+__init__(self, *args, **kwargs): Initializes a new instance of the class.
+__str__(self): Returns a string representation of the object.
+__repr__(self): Returns a string representation of the object.
+save(self): Updates the updated_at attribute with the current datetime.
+to_dict(self): Returns a dictionary representation of the object.
+delete(self): Deletes the object from the storage.
 """
 
 import models
@@ -27,6 +28,7 @@ from sqlalchemy import Column, String, DateTime
 from sqlalchemy.ext.declarative import declarative_base
 
 Base = declarative_base()
+
 
 class BaseModel:
     """
@@ -59,13 +61,17 @@ class BaseModel:
         """
         Returns a string representation of the BaseModel instance.
         """
-        return "[{}] ({}) {}".format(self.__class__.__name__, self.id, self.__dict__)
+        return "[{}] ({}) {}".format(
+            self.__class__.__name__, self.id, self.__dict__
+        )
 
     def __repr__(self):
         """
         Returns a string representation of the BaseModel instance.
         """
-        return "[{}] ({}) {}".format(self.__class__.__name__, self.id, self.__dict__)
+        return "[{}] ({}) {}".format(
+            self.__class__.__name__, self.id, self.__dict__
+        )
 
     def save(self):
         """
